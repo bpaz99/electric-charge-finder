@@ -1,16 +1,6 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+*{
+  margin: 0;
+  padding: 0;
 }
 
 .App-header {
@@ -42,4 +32,19 @@
 }
 .card-lastupdate.card-lastupdate{
   padding: 0;
+}
+.sub-navContainer{
+  background-color: #262626;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 3%;
+}
+.sub-navContainer a{
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0.5rem 0;
 }

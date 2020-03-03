@@ -1,10 +1,8 @@
 import React from 'react';
 import { makeStyles,createMuiTheme,ThemeProvider } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
@@ -16,25 +14,28 @@ function Chargestation(props) {
             height: '100%',
             display:"grid",
             gridTemplateColumns:"100%",
-            gridTemplateRows:"240px minmax(250px,auto) 150px",
-            gridTemplateAreas: ' "img" "text" "contact"'
-        },
-        media: {
-            gridArea:"img",
-            height: 240,
+            gridTemplateRows:"minmax(250px,auto) 150px",
+            gridTemplateAreas: '"text" "contact"'
         },
         textArea:{
             gridArea:"text",
+            textAlign:"center",
             display:"grid",
             gridTemplateColumns:"100%",
-            gridTemplateRows:"150px 70%",
+            gridTemplateRows:"150px 80%",
             gridTemplateAreas: ' "inf" "connections"'
         },
+        AccessComments:{
+            color:"#3f51b5",
+            textAlign:"center"
+        },
         information:{
-            gridArea:"inf"
+            gridArea:"inf",
+            borderBottom: "1px solid gray"
         },
         connectionsWrapper:{
             gridArea:"connections",
+            textAlign:"center"
         },
         connections:{
             display: 'flex',
@@ -45,6 +46,8 @@ function Chargestation(props) {
             width: "40%"
         },
         contact:{
+            width:"80%",
+            borderTop: "1px solid gray",
             gridArea:"contact",
             margin: "3% auto 0"
         }
@@ -61,26 +64,16 @@ function Chargestation(props) {
       });
     const classes = useStyles();
 
-      //data validation perhaps?
-
-
     return (
         <div className="charge-stn">
             <Card className={classes.root}>
-                <CardActionArea>
-                    <CardMedia
-                    className={classes.media}
-                    image="https://www.chargepoint.com/img/fbshare.jpg"
-                    title="Contemplative Reptile"
-                    />
-                </CardActionArea>
                 <CardContent className={classes.textArea}>
                     <ThemeProvider theme={theme} >   
                         <CardContent className={classes.information}>
                             <Typography gutterBottom variant="h5" component="h1">
                                 {props.data.AddressInfo.Title}
                             </Typography>
-                            <Typography variant="body1" color="textSecondary" component="p">
+                            <Typography variant="body1" color="textSecondary" component="p" className={classes.AccessComments}>
                                 {props.data.AddressInfo.AccessComments}
                             </Typography>            
                         </CardContent>
@@ -91,7 +84,7 @@ function Chargestation(props) {
                             <CardContent className={classes.connections}>
                                 {props.data.Connections.map(e=>{
                                 return (
-                                    <CardContent className={classes.connection}>
+                                    <CardContent key={e.ID} className={classes.connection}>
                                         <Typography variant="subtitle1" color="textSecondary" component="p">
                                             Connection type ID:{e.ConnectionTypeID}
                                         </Typography>

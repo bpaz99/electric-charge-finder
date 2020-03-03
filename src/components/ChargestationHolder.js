@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import {Route} from "react-router-dom";
 import axios from "axios";
 import Chargestation from "./Chargestation"
+import StationsMap from "./Map"
+import ViewSelector from "./ViewSelector"
 
 
 /**
@@ -54,14 +57,19 @@ function ChargestationHolder() {
     },[options,pos])
    
     return (
-        <div className="charge-stn-holder">
-           {
-               data.map(e => {
-                  return <Chargestation key={e.UUID} data={e} distanceUnit={options.distanceUnit}></Chargestation>
-               })
-           }
+        <div>
+            <ViewSelector></ViewSelector>
+            <Route exact path="/">
+            <div className="charge-stn-holder">
+                {data.map(e => {
+                    return <Chargestation key={e.UUID} data={e} distanceUnit={options.distanceUnit}></Chargestation>
+                })}
+            </div>
+            </Route>            
+            <Route exact path="/map">
+            <StationsMap data={data} lat={pos.latitude} lng={pos.longitude}></StationsMap>
+            </Route>
         </div>
-
 
     );
 }

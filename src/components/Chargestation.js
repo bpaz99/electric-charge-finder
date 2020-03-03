@@ -13,11 +13,41 @@ function Chargestation(props) {
     const useStyles = makeStyles({
         root: {
             maxWidth: '100%',
-            height: '100%'
+            height: '100%',
+            display:"grid",
+            gridTemplateColumns:"100%",
+            gridTemplateRows:"240px minmax(250px,auto) 150px",
+            gridTemplateAreas: ' "img" "text" "contact"'
         },
         media: {
-          height: 240,
+            gridArea:"img",
+            height: 240,
         },
+        textArea:{
+            gridArea:"text",
+            display:"grid",
+            gridTemplateColumns:"100%",
+            gridTemplateRows:"150px 70%",
+            gridTemplateAreas: ' "inf" "connections"'
+        },
+        information:{
+            gridArea:"inf"
+        },
+        connectionsWrapper:{
+            gridArea:"connections",
+        },
+        connections:{
+            display: 'flex',
+            flexWrap:"wrap",
+            justifyContent: 'space-around'
+        },
+        connection:{
+            width: "40%"
+        },
+        contact:{
+            gridArea:"contact",
+            margin: "3% auto 0"
+        }
     });
     const theme = createMuiTheme({
         typography:{
@@ -31,6 +61,9 @@ function Chargestation(props) {
       });
     const classes = useStyles();
 
+      //data validation perhaps?
+
+
     return (
         <div className="charge-stn">
             <Card className={classes.root}>
@@ -41,51 +74,56 @@ function Chargestation(props) {
                     title="Contemplative Reptile"
                     />
                 </CardActionArea>
-                <CardContent>
-                    <ThemeProvider theme={theme}>
-                        <Typography gutterBottom variant="h5" component="h1">
-                            {props.data.AddressInfo.Title}
-                        </Typography>
-                        <Typography variant="body1" color="textSecondary" component="p">
-                            {props.data.AddressInfo.AccessComments}
-                        </Typography>
-                        <Typography variant="h6" color="textPrimary" component="p">
-                            Connections
-                            {props.data.Connections.map(e=>{
-                            return (
-                                <ThemeProvider>
-                                    <Typography variant="subtitle1" color="textSecondary" component="p">
-                                        Connection type ID:{e.ConnectionTypeID}
-                                    </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary" component="p">
-                                        Quantity:{e.Quantity}
-                                    </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary" component="p">
-                                        Voltage:{e.Voltage}
-                                    </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary" component="p">
-                                        PowerKW:{e.PowerKW}
-                                    </Typography>
-                                </ThemeProvider>
-                            )
-                        })}
-                        </Typography>
+                <CardContent className={classes.textArea}>
+                    <ThemeProvider theme={theme} >   
+                        <CardContent className={classes.information}>
+                            <Typography gutterBottom variant="h5" component="h1">
+                                {props.data.AddressInfo.Title}
+                            </Typography>
+                            <Typography variant="body1" color="textSecondary" component="p">
+                                {props.data.AddressInfo.AccessComments}
+                            </Typography>            
+                        </CardContent>
+                        <CardContent className={classes.connectionsWrapper}>
+                            <Typography variant="h6" color="textSecondary" component="p" className={classes.bigP}>
+                                Connections
+                            </Typography>
+                            <CardContent className={classes.connections}>
+                                {props.data.Connections.map(e=>{
+                                return (
+                                    <CardContent className={classes.connection}>
+                                        <Typography variant="subtitle1" color="textSecondary" component="p">
+                                            Connection type ID:{e.ConnectionTypeID}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="textSecondary" component="p">
+                                            Quantity:{e.Quantity}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="textSecondary" component="p">
+                                            Voltage: {e.Voltage}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="textSecondary" component="p">
+                                            PowerKW:{e.PowerKW}
+                                        </Typography>
+                                    </CardContent>
+                                )})}
+                            </CardContent>       
+                        </CardContent>
                     </ThemeProvider>
-                </CardContent>
-                <CardActions>
-                    <Button size="small" color="primary">
-                        Get Directions
-                    </Button>
-                    <Typography variant="caption" color="textSecondary" component="p">
-                        • {parseFloat(props.data.AddressInfo.Distance).toFixed(2)}{(props.distanceUnit).toString().toUpperCase()} Away
-                    </Typography>
-                </CardActions>
-                <CardContent className="card-lastupdate">
+                </CardContent>                
+                <CardContent className={classes.contact}>
+                    <CardActions className={classes.button}>
+                        <Button size="small" color="primary">
+                            Get Directions
+                        </Button>
+                        <Typography variant="caption" color="textSecondary" component="p">
+                            • {parseFloat(props.data.AddressInfo.Distance).toFixed(2)}{(props.distanceUnit).toString().toUpperCase()} Away
+                        </Typography>
+                    </CardActions>
                     <ThemeProvider theme={theme}>
                         <Typography variant="overline" color="textSecondary" component="p">
                             Contact telephone {props.data.AddressInfo.ContactTelephone1}
                         </Typography>
-                        <Typography variant="overline" color="textSecondary" component="p">
+                        <Typography variant="caption" color="textSecondary" component="p">
                             {props.data.DateLastStatusUpdate} Last update
                         </Typography>
                     </ThemeProvider>

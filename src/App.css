@@ -35,10 +35,10 @@
   justify-content:  space-around;
   align-content: center;
 }
+
 .charge-stn-holder .charge-stn{
   width: 30%;
   margin-bottom: 3%;
-  border: 1px solid red;
 }
 .card-lastupdate.card-lastupdate{
   padding: 0;

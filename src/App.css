@@ -3,6 +3,12 @@
   padding: 0;
 }
 
+body{
+  background: url("https://images.pexels.com/photos/9044/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-position: center;
+  background-size: cover;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -18,7 +24,6 @@
   color: #61dafb;
 }
 
-
 .charge-stn-holder{
   display: flex;
   flex-wrap: wrap;
@@ -29,6 +34,16 @@
 .charge-stn-holder .charge-stn{
   width: 30%;
   margin-bottom: 3%;
+}
+@media (max-width: 1100px){
+  .charge-stn-holder .charge-stn{
+    width: 44%;
+  }
+}
+@media (max-width: 800px){
+  .charge-stn-holder .charge-stn{
+    width: 75%;
+  }
 }
 .card-lastupdate.card-lastupdate{
   padding: 0;
@@ -47,4 +62,8 @@
   font-size: 2rem;
   font-weight: 700;
   padding: 0.5rem 0;
+  transition: all 0.3s ease-in-out;
+}
+.sub-navContainer a:hover{
+  color: crimson;
 }

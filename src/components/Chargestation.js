@@ -22,16 +22,21 @@ function Chargestation(props) {
             textAlign:"center",
             display:"grid",
             gridTemplateColumns:"100%",
-            gridTemplateRows:"150px 80%",
-            gridTemplateAreas: ' "inf" "connections"'
+            gridTemplateRows:"minmax(100px,auto) minmax(70%,auto)",
+            gridTemplateAreas: '"inf" "connections"'
+        },
+        AddressInfo:{
+            textAlign:"center",
         },
         AccessComments:{
             color:"#3f51b5",
-            textAlign:"center"
+            textAlign:"center",
         },
         information:{
             gridArea:"inf",
-            borderBottom: "1px solid gray"
+            display:"flex",
+            flexDirection:"column",
+            alignContent:"center"
         },
         connectionsWrapper:{
             gridArea:"connections",
@@ -73,9 +78,12 @@ function Chargestation(props) {
                             <Typography gutterBottom variant="h5" component="h1">
                                 {props.data.AddressInfo.Title}
                             </Typography>
-                            <Typography variant="body1" color="textSecondary" component="p" className={classes.AccessComments}>
+                            <Typography variant="body1" color="textSecondary" component="p" className={classes.AddressInfo}>
+                                {props.data.AddressInfo.AddressLine1}, {props.data.AddressInfo.Town}
+                            </Typography>                       
+                            <Typography variant="body2" color="textSecondary" component="p" className={classes.AccessComments}>
                                 {props.data.AddressInfo.AccessComments}
-                            </Typography>            
+                            </Typography>                       
                         </CardContent>
                         <CardContent className={classes.connectionsWrapper}>
                             <Typography variant="h6" color="textSecondary" component="p" className={classes.bigP}>

@@ -40,7 +40,7 @@ function ChargestationHolder() {
     const [data,setData] = useState([]);
     const [options, setOptions]=useState({
         distance:"10",
-        maxresults:"10",
+        maxresults:"25",
         distanceUnit:"km" //km for duh
     });
     

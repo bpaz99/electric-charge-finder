@@ -17,7 +17,7 @@ function Mapcontainer(props) {
           initialCenter={{ lat: props.lat, lng: props.lng}}
         >
         {props.data.map(e => {
-                return <Marker position={{lat:e.AddressInfo.Latitude, lng:e.AddressInfo.Longitude}}></Marker>
+                return <Marker key={e.AddressInfo.ID} position={{lat:e.AddressInfo.Latitude, lng:e.AddressInfo.Longitude}}></Marker>
         })}
         </Map>
     );
